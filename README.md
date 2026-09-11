@@ -15,6 +15,8 @@
 - Clear neovim terminal scrollback with `clear`
 - Change neovim tab working directory with `cd`
 - Open a new split inside current instance with `nvim`
+- List active neovim sessions, with their id and working directory, with `nvim sessions`
+- Attach a UI to another running neovim instance with `nvim attach [id]`, with tab completion for active session ids
 
 ## Requirements
 

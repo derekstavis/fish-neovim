@@ -5,7 +5,7 @@ end
 
 function __nvim_session_candidates
   for socket in (_nvim_sessions)
-    printf "%s\t%s\n" (_nvim_session_id $socket) (_nvim_session_cwd $socket)
+    printf "%s\t%s\n" (_nvim_session_id $socket) (_nvim_short_path (_nvim_session_cwd $socket))
   end
 end
 

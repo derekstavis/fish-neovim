@@ -12,14 +12,20 @@ function nvim -w nvim
       set -l target "$argv[2]"
 
       if test -z "$target"
-        if test (count $sockets) -eq 1
-          set target $sockets[1]
-        else
-          _nvim_print_sessions
-          test (count $sockets) -gt 1; and echo "Multiple sessions found, specify one by id." >&2
-          return 1
+        switch (count $sockets)
+          case 0
+            _nvim_print_sessions
+            return 1
+          case 1
+            set target $sockets[1]
+          case '*'
+            _nvim_print_sessions
+            echo "Multiple sessions found. Run 'nvim attach ' and press <Tab> to pick one, or specify an id." >&2
+            return 1
         end
-      else if string match -qr '^\d+$' -- $target
+      end
+
+      if string match -qr '^\d+$' -- $target
         set -l socket (_nvim_socket_for_id $target)
         if test -z "$socket"
           echo "No session with id $target" >&2

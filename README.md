@@ -16,7 +16,7 @@
 - Change neovim tab working directory with `cd`
 - Open a new split inside current instance with `nvim`
 - List active neovim sessions, with their id and working directory, with `nvim sessions`
-- Attach a UI to another running neovim instance with `nvim attach [id]`, with tab completion for active session ids
+- Attach a UI to another running neovim instance with `nvim attach [id]` — press `<Tab>` for an interactive picker
 - Jump straight to a line (and column) with compiler-style references, e.g. `nvim src/main.rs:42` or `nvim src/main.rs:42:7`
 
 ## Requirements

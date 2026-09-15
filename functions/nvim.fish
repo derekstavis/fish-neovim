@@ -48,6 +48,8 @@ function nvim -w nvim
           nvr --remote-send ":e $file<CR>"
         else if test -f "$argv"
           nvr -s --remote-wait-silent "$argv"
+        else if set -l loc (_nvim_parse_file_line "$argv"); test (count $loc) -ge 3
+          nvr -s --remote-wait-silent "+call cursor($loc[2], $loc[3])" "$loc[1]"
         else
           nvr -s -cc "$argv"
         end

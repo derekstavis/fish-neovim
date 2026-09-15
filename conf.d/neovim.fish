@@ -11,4 +11,8 @@ if test -S "$socket"; and command -qs nvr
       source $hook_path
     end
   end
+
+  set -gx PATH $path/bin $PATH
+  set -gx EDITOR nvim-editor
+  set -gx VISUAL nvim-editor
 end

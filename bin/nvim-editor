@@ -1,0 +1,15 @@
+#!/usr/bin/env fish
+# Acts as $EDITOR/$VISUAL when invoked from a fish shell running inside a
+# neovim terminal: opens the file(s) with :edit in the currently focused
+# split of the parent instance and blocks until the buffer is closed (e.g.
+# via :bd) or the process exits -- exactly what git commit/rebase, crontab
+# -e, sudoedit and friends expect from an editor.
+#
+# Outside of a neovim terminal it just falls back to a normal, blocking
+# nvim instance.
+
+if test -z "$NVIM"; and test -z "$NVIM_LISTEN_ADDRESS"
+  exec nvim $argv
+end
+
+exec nvr -s --remote-wait-silent $argv

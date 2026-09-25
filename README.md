@@ -17,6 +17,7 @@
 - Open a new split inside current instance with `nvim`
 - List active neovim sessions, with their id and working directory, with `nvim sessions`
 - Attach a UI to another running neovim instance with `nvim attach [id]` — press `<Tab>` for an interactive picker
+- List the remote UIs attached to your sessions with `nvim detach`, and detach one from its session with `nvim detach <id>` (the id is the attached client's pid) — press `<Tab>` for the list of attached UIs
 - Jump straight to a line (and column) with compiler-style references, e.g. `nvim src/main.rs:42` or `nvim src/main.rs:42:7`
 - `$EDITOR`/`$VISUAL` open in the current instance's focused split — `git commit`, `git rebase -i`, `crontab -e` and friends wait for `:bd` instead of spawning a nested editor
 - `<Tab>` shows fish's own completions in a floating-window popup on the parent neovim instance instead of fish's native pager — type to fuzzy-filter, arrow keys/`<C-n>`/`<C-p>`/`<Tab>` to navigate, `<Enter>` to accept, `<Esc>` to cancel

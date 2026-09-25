@@ -2,6 +2,30 @@ function nvim -w nvim
   switch "$argv[1]"
     case sessions
       _nvim_print_sessions
+    case detach
+      set -l target "$argv[2]"
+
+      if test -z "$target"
+        _nvim_print_attached; or return 1
+        echo "Run 'nvim detach ' and press <Tab> to pick one, or specify an id." >&2
+        return
+      end
+
+      for ui in (_nvim_attached_uis)
+        set -l fields (string split \t -- $ui)
+        if test "$fields[1]" = "$target"
+          if _nvim_detach_ui $fields[2] $fields[3]
+            echo "Detached $target from session "(_nvim_session_id $fields[2])
+            return
+          end
+
+          echo "Failed to detach $target" >&2
+          return 1
+        end
+      end
+
+      echo "No attached UI with id $target" >&2
+      return 1
     case attach
       if test -n "$NVIM"; or test -n "$NVIM_LISTEN_ADDRESS"
         echo "nvim attach: already inside a neovim session, cannot attach to another one." >&2

@@ -15,7 +15,7 @@
 - Clear neovim terminal scrollback with `clear`
 - Change neovim tab working directory with `cd`
 - Open a new split inside current instance with `nvim`
-- List active neovim sessions, with their id and working directory, with `nvim sessions`
+- List active neovim sessions, with their id and working directory, with `nvim sessions` — includes Neordr editors (`/tmp/neordr-*/nvim.sock`)
 - Attach a UI to another running neovim instance with `nvim attach [id]` — press `<Tab>` for an interactive picker
 - List the remote UIs attached to your sessions with `nvim detach`, and detach one from its session with `nvim detach <id>` (the id is the attached client's pid) — press `<Tab>` for the list of attached UIs
 - Jump straight to a line (and column) with compiler-style references, e.g. `nvim src/main.rs:42` or `nvim src/main.rs:42:7`
@@ -25,6 +25,7 @@
 ## Settings
 
 - `$fish_neovim_completion_popup` — controls the `<Tab>` completion popup. On by default; set to `0` to disable it and keep fish's native pager instead.
+- `$fish_neovim_extra_sockets` — extra sockets for `nvim sessions`, `attach` and `detach` to look at, as socket paths or globs, e.g. `set -g fish_neovim_extra_sockets '/srv/editors/*.sock' ~/.cache/my-nvim.sock`. Session ids are always the pid reported by the server (`getpid()`), fetched together with the working directory in a single RPC.
 
 ## Requirements
 

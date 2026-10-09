@@ -1,6 +1,8 @@
-function _nvim_session_cwd --description "Ask a neovim session for its working directory via nvr"
-  set -l socket $argv[1]
-  set -l cwd (nvr --servername "$socket" --remote-expr "getcwd()" 2>/dev/null)
-  test -z "$cwd"; and set cwd "?"
-  echo $cwd
+function _nvim_session_cwd --description "Ask a neovim session for its working directory"
+  set -l fields (string split \t -- (_nvim_session_info $argv[1]))
+  if test (count $fields) -ge 2; and test -n "$fields[2]"
+    echo $fields[2]
+  else
+    echo "?"
+  end
 end

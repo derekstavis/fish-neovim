@@ -6,8 +6,9 @@ end
 
 function __nvim_session_candidates
   for socket in (_nvim_sessions)
-    set -l cwd (_nvim_session_cwd $socket)
-    printf "%s\t%s\n" (_nvim_session_id $socket) (_nvim_with_branch (_nvim_short_path $cwd) $cwd)
+    set -l info (string split \t -- (_nvim_session_info $socket))
+    test (count $info) -ge 2; or continue
+    printf "%s\t%s\n" $info[1] (_nvim_with_branch (_nvim_short_path $info[2]) $info[2])
   end
 end
 

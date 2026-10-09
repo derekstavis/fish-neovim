@@ -9,7 +9,7 @@ function _nvim_print_attached --description "Print remote UIs attached to active
   printf "%-9s  %-8s  %-8s  %s\n" ID SESSION SIZE CWD
   for ui in $uis
     set -l fields (string split \t -- $ui)
-    set -l cwd (_nvim_session_cwd $fields[2])
-    printf "%-9s  %-8s  %-8s  %s\n" $fields[1] (_nvim_session_id $fields[2]) $fields[4] (_nvim_with_branch $cwd $cwd)
+    set -l info (string split \t -- (_nvim_session_info $fields[2]))
+    printf "%-9s  %-8s  %-8s  %s\n" $fields[1] $info[1] $fields[4] (_nvim_with_branch $info[2] $info[2])
   end
 end

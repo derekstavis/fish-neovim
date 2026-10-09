@@ -8,7 +8,8 @@ function _nvim_print_sessions --description "Print active neovim sessions with t
 
   printf "%-8s  %s\n" ID CWD
   for socket in $sockets
-    set -l cwd (_nvim_session_cwd $socket)
-    printf "%-8s  %s\n" (_nvim_session_id $socket) (_nvim_with_branch $cwd $cwd)
+    set -l info (string split \t -- (_nvim_session_info $socket))
+    test (count $info) -ge 2; or continue
+    printf "%-8s  %s\n" $info[1] (_nvim_with_branch $info[2] $info[2])
   end
 end

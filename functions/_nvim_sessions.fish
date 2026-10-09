@@ -9,4 +9,11 @@ function _nvim_sessions --description "List sockets of active neovim instances"
       echo $socket
     end
   end
+
+  for socket in (_nvim_extra_sockets)
+    test -S "$socket"; or continue
+    contains -- $socket $seen; and continue
+    set -a seen $socket
+    echo $socket
+  end
 end

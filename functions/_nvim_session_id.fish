@@ -1,4 +1,4 @@
-function _nvim_session_id --description "Extract a neovim session's id (its pid) from its socket path"
-  set -l match (string match -r 'nvim\.(\d+)\.0$' -- $argv[1])
-  test (count $match) -ge 2; and echo $match[2]
+function _nvim_session_id --description "Ask a neovim session for its id (its pid)"
+  set -l fields (string split \t -- (_nvim_session_info $argv[1]))
+  test (count $fields) -ge 1; and echo $fields[1]
 end
